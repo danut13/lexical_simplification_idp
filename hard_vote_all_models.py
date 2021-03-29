@@ -10,7 +10,7 @@ def hard_vote(language):
     data = Dataset(language)
     gold_labels = [sent['gold_label'] for sent in data.devset]
     predictions = []
-    for pred in execute_demo_feature(language):
+    for pred in execute_demo_feature(language, 'predictions'):
         predictions.append(pred)
     for pred in execute_demo_w2v(language):
         predictions.append(pred)

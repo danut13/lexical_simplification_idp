@@ -9,7 +9,7 @@ from random import seed
 import numpy as np
 
 
-def execute_demo_feature(language):
+def execute_demo_feature(language, request):
     data = Dataset(language)
 
     print("{}: {} training - {} dev".format(language, len(data.trainset), len(data.devset)))
@@ -49,19 +49,23 @@ def execute_demo_feature(language):
     #### SIMPLIFY WHOLE PHRASES OF DATASET ####
 
     # simplify_whole_phrases(data.devset, baseline)
-
-    return baseline
+    if request == 'baseline':
+        return baseline
+    if request == 'predictions':
+        return predictions_int
 
 
 if __name__ == '__main__':
     seed(100)
-    model = execute_demo_feature('english')
+    model = execute_demo_feature('english', 'baseline')
     simplifier = Simplifier()
-    text = """\
-The church is an example of red-brick Eclecticism. It has the elements of ancient architecture, 
-and of modernism (in particular, large semicircular window openings of the refectory). 
-The building has a cruciform appearance, five onion domes covered with tent are strictly proportional. 
-The bell tower is attached directly to the church building and is located at its western entrance.
-"""
+    text = """The Red Ensign Group is a collaboration of United Kingdom shipping registries including British 
+    Overseas Territories and Crown dependencies. It takes its name from the Red Ensign ("Red Duster") flag flown by 
+    British civil merchant ships. Its stated purpose is to combine resources to maintain safety and quality across 
+    the British fleet. As of 2018 it ranked the ninth largest such group in the world, with approximately 1,
+    300 vessels.[1] Sir Alan Massey of the UK Maritime and Coastguard Agency commented: ".. keeping [ships] inside 
+    the REG family means that you still have some influence over their quality and performance... We can take 
+    administrative measures against members of [it] if we want to so as to ensure that safety is brought up to the 
+    necessary standards..."[2] The vessels also receive British Consular assistance and protection.[3] """
     print(simplify_text(text, model, simplifier))
 

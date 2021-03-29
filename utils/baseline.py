@@ -35,7 +35,7 @@ class Baseline(object):
                 '[qwrtypsdfghjklzxcvbnmQWRTYPSDFGHJKLZXCVBNM](?![qwrtypsdfghjklzxcvbnmQWRTYPSDFGHJKLZXCVBNM])')
             self.trans_vow = re.compile('[aeiouyAEIOUY](?![aeiouyAEIOUY])')
             self.model_file = 'frequency/word-freq-eng.pkl'
-            self.nms = 1
+            self.nms = 3
             self.nm = 4
 
         with open(self.model_file, 'rb') as f:
@@ -48,10 +48,10 @@ class Baseline(object):
                        RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
                        AdaBoostClassifier(), LogisticRegression(),
                        MLPClassifier(alpha=1, learning_rate='adaptive', max_iter=5000),
-                       GaussianNB(), QuadraticDiscriminantAnalysis()][self.nms:self.nm]
+                       GaussianNB(), QuadraticDiscriminantAnalysis()]#[self.nms:self.nm]
         self.names = ["Linear SVM", "Nearest Neighbors", "RBF SVM",
                       "Decision Tree", "Random Forest", "AdaBoost", "Logistic Regression",
-                      "Neural Net", "Naive Bayes", "QDA"][self.nms:self.nm]
+                      "Neural Net", "Naive Bayes", "QDA"]#[self.nms:self.nm]
         print('Number of models:', len(self.models))
 
     def extract_features(self, words):

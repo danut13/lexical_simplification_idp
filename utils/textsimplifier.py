@@ -1,17 +1,18 @@
 from utils.phrasesimplifier import simplify_phrase
+import nltk
 import re
 
 
 def simplify_text(text, baseline, simplifier):
     simplified_phrase = ""
-    sentences = text.split(".")
+    sentences = nltk.tokenize.sent_tokenize(text)
     for sentence in sentences:
-        sentence = sentence.lstrip()
+        sentence = sentence.lstrip(' ')
         punctuation_marks_and_spaces = remember_punctuation_marks_and_spaces(sentence)
         simplified_phrase += reconstruct_phrase(simplify_phrase(sentence, baseline, simplifier),
                                                 punctuation_marks_and_spaces)
-        simplified_phrase += '. '
-    return simplified_phrase
+        simplified_phrase += ' '
+    return simplified_phrase[:-1]
 
 
 def remember_punctuation_marks_and_spaces(phrase):

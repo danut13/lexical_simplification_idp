@@ -28,7 +28,7 @@ class Simplifier:
         with torch.no_grad():
             outputs = self.model(tokens_tensor, token_type_ids=segments_tensors)
             predictions = outputs[0][0][masked_index]
-        predicted_ids = torch.argsort(predictions, descending=True)[:7]
+        predicted_ids = torch.argsort(predictions, descending=True)[:5]
         predicted_tokens = self.tokenizer.convert_ids_to_tokens(list(predicted_ids))
         list_candidates_bert.append((word, predicted_tokens))
 

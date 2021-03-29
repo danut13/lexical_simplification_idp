@@ -16,7 +16,7 @@ class Word2vec(object):
 
         self.language = language
         if language == 'english':
-            self.w2vmodel = gensim.models.KeyedVectors.load_word2vec_format('word2vec-pretrained/GoogleNews-vectors'
+            self.w2vmodel = gensim.models.KeyedVectors.load_word2vec_format('pretrained_models/GoogleNews-vectors'
                                                                             '-negative300.bin.gz', binary=True)
             self.nms = 8
             self.nm = 10
@@ -27,13 +27,13 @@ class Word2vec(object):
                        DecisionTreeClassifier(max_depth=5),
                        RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
                        AdaBoostClassifier(), LogisticRegression(), GaussianNB(),
-                       QuadraticDiscriminantAnalysis(), MLPClassifier(alpha=1)][self.nms:self.nm]
+                       QuadraticDiscriminantAnalysis(), MLPClassifier(alpha=1)]#[self.nms:self.nm]
         self.names = ["Nearest Neighbors with w2v", "Linear SVM with w2v",
                       "RBF SVM with w2v",
                       "Decision Tree with w2v", "Random Forest with w2v",
                       "AdaBoost with w2v", "Logistic Regression with w2v",
                       "Naive Bayes with w2v", "QDA with w2v",
-                      "Neural Net with w2v"][self.nms:self.nm]
+                      "Neural Net with w2v"]#[self.nms:self.nm]
         print('Pretrained w2v loaded \nNumber of models:', len(self.models))
 
     def extract_features(self, word):
